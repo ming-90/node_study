@@ -9,3 +9,6 @@
     * git remote add origin https://github.com/var-mingi/node_study.git
         * 리모트 안했을 경우만 (최초 한번만)
     * git push -u origin master
+
+3. pull
+    * git pull upstream master
