@@ -31,3 +31,19 @@
         * 라우터 레벨 미들웨어
         * 오류 처리 미들웨러
         * 써드파티 미들웨어
+
+6. 외부함수 불러오기
+```js
+exports.dbconnection = function() {
+    console.log('define')
+}
+```
+>함수 선언부
+
+````js
+import db from './DB/DB_connect'
+
+db.dbconnection();
+
+````
+>함수 호출
