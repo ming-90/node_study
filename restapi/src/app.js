@@ -6,7 +6,10 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import indexRouter from './routes/v1/index'
 import userRouter from './routes/v1/user'
+//CONNECT TO MONGODB SERVER
 import db from './DB/DB_connect'
+//DB SCHEMA
+require('./DB/schema')
 
 db.dbconnection();
 

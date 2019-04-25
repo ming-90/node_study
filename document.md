@@ -50,6 +50,7 @@ db.dbconnection();
 
 7. DB connect
 
+>DB_connect.js
 ```js
 import mongoose from 'mongoose'
 
@@ -69,11 +70,55 @@ exports.dbconnection = function() {
     })
 }
 ```
->DB_connect.js
 
+>app.js
 ```js
 import db from './DB/DB_connect'
 
 db.dbconnection();
 ```
->app.js
+
+7. MongoDB collection name
+    ![collection_name](./document_img/collection_name.png)
+
+8. MongoDB create, find
+    * 준비 과정
+        * 디비 스키마를 정의한 파일을 미리 define 해야 한다. 이것은 디비 커넥션 함수와 같이 둔다
+        ````js
+        require('./DB/schema')
+
+        db.dbconnection();
+        ````
+        * collection name은 .env에 정의 해둔 URI에 있으며, 접속 주소/{collection_name}이 된다
+
+    * create
+        * {dbconnection}.create({schema},{callback function})
+        * 예)
+        ````js
+        const user_create = (req, res, next) => {
+            const db_test = require('../DB/schema');
+            db_test.create({
+                userId : 'minki',
+                password: 'test',
+                userNmae: '123'
+            },
+            function(err,user){
+                if(err) res.json({massage:'err'});
+                res.json({massage:'creat'});
+            })
+        }
+        ````
+    
+    * find
+        * {dbconnection}.find({},{callback function})
+        * 예)
+        ````js
+        const user_find = (req, res, next) => {
+            const db_test = require('../DB/schema');
+            db_test.find({}, function(err,users){
+                if(err) res.json({massage:'err'});
+                res.json({massage:users});
+            })
+
+        }
+        ````
