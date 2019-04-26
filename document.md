@@ -1,10 +1,9 @@
 ### Node.js
 * 마크다운 미리 보기 Ctrl + K V
 
-1. 기본설정
-    >express와 필요한 것들 설치
-    * npm install -g express-generator
-    * express {projectname} && npm install
+1. .gitignore 설정
+    * gitignore 파일이 있는 곳을 기준으로 상대 경로를 써주면 된다. 단 경로 제일 앞쪽에 ./ 없이 써준다
+    * restapi/res/node_modules/*
 
 2. dotenv
     >node를 실행할때 시스템 변수를 명시적으로 지정하는 방법<br>
