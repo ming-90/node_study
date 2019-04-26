@@ -4,17 +4,15 @@ import createError from 'http-errors'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+import bodyParser from 'body-parser'
 import indexRouter from './routes/v1/index'
 import userRouter from './routes/v1/user'
 //CONNECT TO MONGODB SERVER
-import db from './DB/DB_connect'
-//DB SCHEMA
-require('./DB/schema')
-
-db.dbconnection();
-
+ 
 var app = express();
 
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

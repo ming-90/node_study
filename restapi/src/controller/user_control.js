@@ -1,10 +1,12 @@
-const app = express();
+import user from '../Model/user';
+import db from '../DB/DB_connect'
+//아이디 생성
 const user_create = (req, res, next) => {
-    const db_test = require('../DB/schema');
-    db_test.create({
-        userId : req.bady.name,
-        password: req.bady.pass,
-        userNmae: req.body.email
+    db.dbconnection();
+    user.create({
+        userId : req.body.userId,
+        password: req.body.password,
+        userName: req.body.userName
     },
     function(err,user){
         if(err) res.json({massage:'err'});
@@ -16,8 +18,8 @@ const test = (req, res, next) => {
 }
 
 const user_find = (req, res, next) => {
-    const db_test = require('../DB/schema');
-    db_test.find({}, function(err,users){
+    db.dbconnection();
+    user.find({}, function(err,users){
         if(err) res.json({massage:'err'});
         res.json({massage:users});
     })
