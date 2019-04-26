@@ -1,0 +1,4 @@
+## Ignore File ##
+
+./src/.env
+./src/node_modules
