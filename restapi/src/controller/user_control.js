@@ -1,5 +1,6 @@
 import user from '../Model/user';
 import db from '../DB/DB_connect'
+import { isBuffer } from 'util';
 //아이디 생성
 const user_create = (req, res, next) => {
     db.dbconnection();
@@ -13,11 +14,19 @@ const user_create = (req, res, next) => {
         res.json({massage:'creat'});
     })
 }
-const test = (req, res, next) => {
-    console.log(req.body);
+//아이디 삭제
+const user_delete = (req, res, next) => {
+    db.dbconnection();
+    user.remove({
+        userId: req.body.userId
+    },
+    function(err,req){
+        if(err) res.json({massage:'err'});
+        res.json({massage:'delete'});
+    })
 }
-
-const user_find = (req, res, next) => {
+//전체 찾기
+const find_all = (req, res, next) => {
     db.dbconnection();
     user.find({}, function(err,users){
         if(err) res.json({massage:'err'});
@@ -25,7 +34,19 @@ const user_find = (req, res, next) => {
     })
 
 }
+//유저 찾기
+const user_find = (req, res, next) => {
+    console.log("es");
+    db.dbconnection();
+    user.findOne({
+        userId: req.body.userId
+    },
+    function(err,user){
+        if(err) res.json({massage:'err'});
+        res.json({massage:user});
+    });
+}
 
 export{
-    user_create, user_find, test
+    user_create, find_all, user_delete, user_find
 }
