@@ -80,7 +80,7 @@ db.dbconnection();
 7. MongoDB collection name
     ![collection_name](./document_img/collection_name.png)
 
-8. MongoDB create, find
+8. MongoDB create, find, update
     * 준비 과정
         * 디비 스키마를 정의한 파일을 미리 define 해야 한다. 이것은 디비 커넥션 함수와 같이 둔다
         ````js
@@ -102,22 +102,68 @@ db.dbconnection();
                 userNmae: '123'
             },
             function(err,user){
-                if(err) res.json({massage:'err'});
-                res.json({massage:'creat'});
+                if(err) res.json({message:'err'});
+                res.json({message:'creat'});
             })
         }
         ````
     
     * find
-        * {dbconnection}.find({},{callback function})
+        * {dbconnection}.find({find schema},{callback function})
         * 예)
         ````js
         const user_find = (req, res, next) => {
             const db_test = require('../DB/schema');
             db_test.find({}, function(err,users){
-                if(err) res.json({massage:'err'});
-                res.json({massage:users});
+                if(err) res.json({message:'err'});
+                res.json({message:users});
             })
 
         }
         ````
+    
+    * update
+        * {dbconnection}.updateOne({find schema}, {set schema}, {collback function})
+        * 예)
+        ```js
+        const user_update = (req, res, next) => {
+            db.dbconnection();
+            user.updateOne({userId:req.body.userId}, {$set:{userName:req.body.userName}}, function(err,update){
+                if(err){
+                    res.json({message:'update err', err});
+                    return;
+                } 
+            res.json({message:'update', update});
+            })
+        }
+        ```
+    
+    * delete
+        * {dbconnection}.remove({find schema}, {collback function})
+        * 예)
+        ```js
+        const user_delete = (req, res, next) => {
+            db.dbconnection();
+            user.remove({
+                userId: req.body.userId
+            },
+            function(err,req){
+                if(err) {
+                    res.json({message:'delete err'});
+                    return;
+                }
+                res.json({message:'delete'});
+            })
+        }
+        ```
+
+    * mongo DB 도 쿼리문을 유연하게 사용 가능.
+    ```js
+    var user = User.find({'userid':userid});
+
+      user.remove(function(err){}
+    ```
+    >이런식으로 먼저 검색 후 그걸 객체로 remove도 가능
+
+
+

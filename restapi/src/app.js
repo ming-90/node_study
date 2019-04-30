@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
 import indexRouter from './routes/v1/index'
-import userRouter from './routes/v1/user'
+import userRouter from './routes/v1/UserRoute'
 //CONNECT TO MONGODB SERVER
  
 var app = express();
