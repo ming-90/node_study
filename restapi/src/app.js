@@ -7,6 +7,8 @@ import logger from 'morgan'
 import bodyParser from 'body-parser'
 import indexRouter from './routes/v1/index'
 import userRouter from './routes/v1/UserRoute'
+import sess from './routes/v1/sess'
+import session from 'express-session'
 //CONNECT TO MONGODB SERVER
  
 var app = express();
@@ -17,9 +19,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//세션 설정
+app.use(session({
+  secret: '@#@$MYSIGN$@#$#',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/user', userRouter);
 app.use('/v1', indexRouter);
+app.use('/sess', sess);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

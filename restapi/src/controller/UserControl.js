@@ -68,7 +68,11 @@ const updateUser = (req, res, next) => {
         res.json({message:'update', update});
     })
 }
-
+//로그인
+const loginUser = (req, res, next) => {
+    let sess = req.session;
+    res.json({id:sess.userId, pass: sess.pass})
+}
 export{
-    createUser, findUser, deleteUser, findoneUser,updateUser 
+    createUser, findUser, deleteUser, findoneUser,updateUser,loginUser 
 }

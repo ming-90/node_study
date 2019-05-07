@@ -165,5 +165,15 @@ db.dbconnection();
     ```
     >이런식으로 먼저 검색 후 그걸 객체로 remove도 가능
 
-
+9. SESSION 관리
+    * session 모듈 install ( npm install express-session )
+    ```js
+    import session from 'express-session'
+    app.get('/', function(req, res, next) {
+        let sess = req.session;
+        res.json({id:sess.userId, pass: sess.pass})
+    }
+    ```
+    > 사용법<br>
+        * 세션 모듈을 임포트 시킨뒤 req.session 을 변수에 저장, 원하는 세션 명을 정의 하면 된다
 

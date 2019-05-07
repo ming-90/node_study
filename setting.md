@@ -31,3 +31,6 @@
 4. 몽고 디비 설치
     * npm install mongodb --save
     * npm install mongoose --save
+
+5. Session 모율
+    * npm install express-session
