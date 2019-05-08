@@ -11,7 +11,10 @@ const cookietest = (req, res, next) => {
     let counter;
     counter = req.cookies.counter || 0;
     counter ++
-    res.cookie('counter',counter,{path: '/test/aa'});
+    res.cookie('counter','test',{
+        maxAge:10000
+    }
+    );
     res.json({message:counter});
 }
 //쿠키 삭제

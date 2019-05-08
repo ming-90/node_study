@@ -177,7 +177,8 @@ db.dbconnection();
     >세션 모듈을 임포트 시킨뒤 req.session 을 변수에 저장, 원하는 세션 명을 정의 하면 된다
 
 10. COOKIE 관리
-    * cookie 모듈 install ( npm install cookie-parser )
+    * 쿠키 생성
+        * cookie 모듈 install ( npm install cookie-parser )
     ```js
     app.get('/',function(req, res, next) {
         let counter;
@@ -188,3 +189,12 @@ db.dbconnection();
     }
     ```
     > 쿠키파서 임포트 시킨 뒤 req.cookies.{변수명} 으로 해당 쿠키를 가져온다
+
+    * 쿠키 삭제
+    ```js
+    app.get('/',function(req, res, next){
+        res.clearCookie('counter');
+        res.json({message:'del'});
+    }
+    ```
+    
