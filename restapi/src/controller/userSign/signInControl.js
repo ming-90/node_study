@@ -1,5 +1,6 @@
 import user from '../../Model/userInfomation'
-import db from '../../DB/DB_connect'
+import db from '../../config/DB/DB_connect'
+import {sessionConnection, sessionDelete} from '../../config/Session/session'
 
 //sign in
 const signIn = (req, res, next) => {
@@ -21,6 +22,7 @@ const signIn = (req, res, next) => {
             res.json({error:'1', message:'비밀번호가 일치하지 않습니다'})
             return
         }
+        sessionConnection(req);
         res.json({error:'0', message:findUser.userName+'님 환영합니다'})
     })
 }

@@ -5,14 +5,14 @@ require('dotenv').config();
  */
 
 var app = require('../app');
-var debug = require('debug')('restapi:server');
+var debug = require('debug')(process.env.DEBUG);
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3005');
+var port = normalizePort(process.env.PORT);
 app.set('port', port);
 
 /**

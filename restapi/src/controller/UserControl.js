@@ -1,5 +1,5 @@
 import user from '../Model/userInfomation';
-import db from '../DB/DB_connect'
+import db from '../config/DB/DB_connect'
 //아이디 생성
 const createUser = (req, res, next) => {
     db.dbconnection();

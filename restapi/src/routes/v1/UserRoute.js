@@ -14,5 +14,6 @@ router.get('/test',loginUser)
 
 router.post('/signin',signIn)
 router.get('/idcheck',idCheck)
+router.post('/signup',idCreate)
 
 export default router

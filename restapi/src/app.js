@@ -7,6 +7,7 @@ import logger from 'morgan'
 import bodyParser from 'body-parser'
 import indexRouter from './routes/v1/index'
 import userRouter from './routes/v1/UserRoute'
+import signRouter from './routes/v2/signRoute'
 import sess from './routes/v1/sess'
 import session from 'express-session'
 //CONNECT TO MONGODB SERVER
@@ -21,11 +22,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //세션 설정
 app.use(session({
-  secret: '@#@$MYSIGN$@#$#',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }));
 
+//회원가입,로그인 관련 api
+app.use('/api', signRouter);
+//세션 정보 확인
+/* app.use((req,res,next) => {
+  if(req.session.userId) next();
+  else{
+    res.redirect("/test");
+  }
+}) */
+//테스트 api
 app.use('/user', userRouter);
 app.use('/v1', indexRouter);
 app.use('/sess', sess);
