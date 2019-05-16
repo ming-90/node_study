@@ -5,12 +5,12 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
-import indexRouter from './routes/v1/index'
-import userRouter from './routes/v1/UserRoute'
 import signRouter from './routes/v2/signRoute'
-import sess from './routes/v1/sess'
 import session from 'express-session'
+import db from './config/DB/DB_connect'
+
 //CONNECT TO MONGODB SERVER
+db.dbconnection();
  
 var app = express();
 
@@ -29,6 +29,7 @@ app.use(session({
 
 //회원가입,로그인 관련 api
 app.use('/api', signRouter);
+
 //세션 정보 확인
 /* app.use((req,res,next) => {
   if(req.session.userId) next();
@@ -36,10 +37,6 @@ app.use('/api', signRouter);
     res.redirect("/test");
   }
 }) */
-//테스트 api
-app.use('/user', userRouter);
-app.use('/v1', indexRouter);
-app.use('/sess', sess);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

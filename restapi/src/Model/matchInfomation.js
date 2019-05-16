@@ -5,10 +5,10 @@ const matchSchema = new Schema({
     
     userId : { type : String, unique : true },	
     userProfile : {
-	    NICKNAME : { type : String },	
+	    userNickname : { type : String },	
 	    userAge : { type : Number },	
 	    userGender : { type : String },	
-	    userItroduction : { type : String },	
+	    userIntroduction : { type : String },	
 	    imageUrl : { type : String },	
     },
     proposeTo : {
