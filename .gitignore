@@ -1,4 +1,4 @@
 ## Ignore File ##
 
-restapi/src/*.env
+##restapi/src/*.env
 restapi/src/node_modules/*
