@@ -21,7 +21,7 @@ const updateInformation = (req, res, next) => {
                 
             })
     } catch(e){
-        res.json({error:e})
+        res.json({error:'1', message:e})
     }
 }
 
