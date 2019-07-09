@@ -21,11 +21,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //세션 설정
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true
-}));
+//app.use(session({
+  //secret: process.env.SESSION_SECRET,
+  //resave: false,
+  //saveUninitialized: true
+//}));
 
 //회원가입,로그인 관련 api
 app.use('/api', signRouter);
