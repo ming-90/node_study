@@ -19,7 +19,7 @@ router.get('/findoneprofile',findoneProfile)
 router.get('/updatetest',updateUsertest)
 
 //login
-router.get('/signin',signIn)
+router.put('/signin',signIn)
 //id check
 router.get('/signup',idCheck)
 //id create
