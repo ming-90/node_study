@@ -7,7 +7,7 @@ const userSchema = new Schema({
     userName: {type:String},
     userEmail:{type:String},
     makeDate : {type:Date, default: Date.now},
-    upDate : {type:Date, default: Date.now}
+    loginDate : {type:Date, default: Date.now}
 })
 
 module.exports = mongoose.model('userInfomation',userSchema);

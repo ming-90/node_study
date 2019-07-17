@@ -2,41 +2,31 @@ require('dotenv').config()
 
 import createError from 'http-errors'
 import express from 'express'
-import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
 import signRouter from './routes/v2/signRoute'
-import session from 'express-session'
+import crawlingRouter from './routes/v2/crawlingRoute'
 import db from './config/DB/DB_connect'
+import cors from 'cors'
+//var cors = require('cors')
 
 //CONNECT TO MONGODB SERVER
 db.dbconnection();
  
 var app = express();
 
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-//세션 설정
-//app.use(session({
-  //secret: process.env.SESSION_SECRET,
-  //resave: false,
-  //saveUninitialized: true
-//}));
+
 
 //회원가입,로그인 관련 api
-app.use('/api', signRouter);
-
-//세션 정보 확인
-/* app.use((req,res,next) => {
-  if(req.session.userId) next();
-  else{
-    res.redirect("/test");
-  }
-}) */
+app.use('/api', cors(), signRouter);
+//크롤링 관련 api
+app.use('/crawling', crawlingRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

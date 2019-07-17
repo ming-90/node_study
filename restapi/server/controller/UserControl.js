@@ -1,5 +1,4 @@
 import user from '../Model/userInfomation';
-import match from '../Model/matchInfomation';
 //아이디 생성
 const createUser = (req, res, next) => {
     user.create({

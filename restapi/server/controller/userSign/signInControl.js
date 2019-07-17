@@ -24,14 +24,18 @@ const signIn = (req, res, next) => {
                 res.json({errCode:'1', errMessage:'비밀번호가 일치하지 않습니다'}) 
                 return
             }
-            user.updateOne({userId:req.body.userId}, 
-            {$set:{upDate:Date.now}}, 
-            function(err,callback){
+            //로그인 시간 업데이트
+            user.findOne({userId:id}, 
+            function(err,User){
+                User.loginDate = Date.now()
+                User.save()
                 if(err){
                     res.json({error:'2', message:err})
                     return
                 }
             })
+            let ip = res.connection.remoteAddress
+            console.log(ip);
             res.json({errCode:'0', errMessage:findUser.userName+'님 환영합니다'})
         })
     } catch(e){

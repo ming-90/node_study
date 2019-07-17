@@ -1,5 +1,4 @@
 import user from '../../Model/userInfomation'
-import match from '../../Model/matchInfomation'
 
 //아이디 체크
 const idCheck = (req, res, next) => {
