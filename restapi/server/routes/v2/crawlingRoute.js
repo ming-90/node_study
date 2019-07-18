@@ -1,5 +1,5 @@
 import express from 'express'
-import crawling from '../../controller/crawling/test'
+import {crawling} from '../../controller/crawling/test'
 
 const router = express.Router()
 
