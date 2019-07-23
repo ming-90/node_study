@@ -197,4 +197,33 @@ db.dbconnection();
         res.json({message:'del'});
     }
     ```
+
+11. Crawling
+    * puppeteer을 이용한 크롤링 - 페이지를 직접 띄우는 방식으로, 동적 웹페이지도 크롤링 가능
+
+    ```js
+    const puppeteer = require('puppeteer')
     
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage(); 
+
+    const url = 'https://developers.google.com/web/'
+
+    await page.goto(url, {waitUntil:'networkidle2'})
+    //waitUntil 설정을 해줘야 페이지가 전부 로딩 될때까지 기다린다(동적 페이지 포함)
+
+    await page.evaluate(() => {
+        document.querySelector('#searchbox input').value = 'puppeteer' //검색창에 해당 스트링 넣기
+    })
+    //또는
+    await page.type('#searchbox input').value = 'puppeteer'
+    ```
+    > 대략적인 방법
+
+    * Selector
+        * document.querySelector - page.evaluate 안에서 사용할 수 있는 dom
+          이 외에도 javascript document로 할수 있는 여러가지를 사용가능
+        * jQuery와 검색 방식이 똑같다
+            1. class 검색 : $('.className')
+            2. id 검색 : $('#idName')
+            3. $('.className input') - 이런 경우는 className 클래스 자식 중 input 타입을 가져옴
