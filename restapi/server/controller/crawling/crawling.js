@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer'
+import blogInfomation from '../../Model/blogInfomation'
 
 module.exports = async(req, res, next) => {
 
@@ -11,6 +12,7 @@ module.exports = async(req, res, next) => {
         let blogList = []
         let url
         let nextUrl
+        let keyword = '창원맛집'
 
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
@@ -18,7 +20,7 @@ module.exports = async(req, res, next) => {
         for(i=0; i<5; i++){
 
             //검색한 내용으로 블로그 아이디 수집(페이지당 7개 5페이지까지)
-            url = 'https://section.blog.naver.com/Search/Post.nhn?pageNo=' + (i+1) + '&rangeType=ALL&orderBy=sim&keyword=%EC%B0%BD%EC%9B%90%EB%A7%9B%EC%A7%91'
+            url = 'https://section.blog.naver.com/Search/Post.nhn?pageNo=' + (i+1) + '&rangeType=ALL&orderBy=sim&keyword=' + keyword
 
             await page.goto(url,{waitUntil: 'networkidle2'})
 
@@ -39,6 +41,7 @@ module.exports = async(req, res, next) => {
                     id : blogId
                 }
             },i)
+            //console.log(blogList)
             searchList.push(blogList)
         }
         //console.log(searchList)
@@ -51,7 +54,7 @@ module.exports = async(req, res, next) => {
             for(j=0; j<blogId.length; j++){
                 //모바일 버전에만 total, total이 있기때문에 모바일 버전으로 열어줌
                 nextUrl = "https://m.blog.naver.com/" + blogId[j]
-                console.log(nextUrl)
+                //console.log(nextUrl)
 
                 await page.goto(nextUrl,{waitUntil: 'networkidle2'})
 
@@ -68,10 +71,45 @@ module.exports = async(req, res, next) => {
             searchList[i].today = todayList
         }
         console.log(searchList)
+        dbInsert(searchList, keyword)
         res.json({ result : "OK"})
 
+
      }catch(e){
-        console.log(e)
+        console.log('error ' + e)
     }
 }
 
+const dbInsert = (data, keyword) => {
+    console.log("DB Insert start")
+    data.forEach(function(element){
+        for(let i = 0; i < 7; i++){
+            blogInfomation.findOne({blogId:element["id"][i]},
+            function(err, findblog){
+                if(err){ 
+                    res.json({errCode:'1', errMessage:err})
+                    return
+                }
+                //디비에 내용이 없을때만 인서트
+                if(findblog !== null){ 
+                    console.log(findblog)
+                    return
+                }
+
+                blogInfomation.create({
+                    blogId: element["id"][i],
+                    blogAddr: element["Addr"][i],
+                    visitorToday: element["today"][i],
+                    visitorTotal: element["total"][i],
+                    searchString: keyword,
+                    searchPage: element["page"],
+                    sendYN: "N",
+                    lastDate: "",
+                    contentsNote: ""
+                })
+            }
+            )
+        }
+    })
+    
+}

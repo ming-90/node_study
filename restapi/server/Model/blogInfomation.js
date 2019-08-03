@@ -5,12 +5,14 @@ const blogSchema = new Schema({
     blogId : { type : String, unique : true },
     blogAddr : { type : String },
     visitorToday : { type : String },
-    visitorToday : { type : String },
+    visitorTotal : { type : String },
     makeDate : { type : Date, default : Date.now },
     updateDate: { type : Date, default : Date.now },
-    lastDate: { type : Date },
     searchString : { type : String },
-    searchPage: { type : String }
+    searchPage: { type : String },
+    sendYN: { type : String },
+    lastDate: { type : Date },
+    contentsNote: { type : String }
 })
 
 module.exports = mongoose.model('blogInfomation',blogSchema);

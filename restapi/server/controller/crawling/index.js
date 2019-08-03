@@ -1,1 +1,1 @@
-exports.test = require('./crawling')
+exports.blogCrawling = require('./crawling')
