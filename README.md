@@ -11,4 +11,4 @@
     * git push -u origin master
 
 3. pull
-    * git pull upstream master
+    * git pull origin master

@@ -6,8 +6,8 @@ const blogSchema = new Schema({
     blogAddr : { type : String },
     visitorToday : { type : String },
     visitorTotal : { type : String },
-    makeDate : { type : Date, default : Date.now },
-    updateDate: { type : Date, default : Date.now },
+    makeDate : { type : Date  },
+    updateDate: { type : Date },
     searchString : { type : String },
     searchPage: { type : String },
     sendYN: { type : String },
@@ -15,4 +15,4 @@ const blogSchema = new Schema({
     contentsNote: { type : String }
 })
 
-module.exports = mongoose.model('blogInfomation',blogSchema);
+module.exports = mongoose.model('blogInformation',blogSchema);

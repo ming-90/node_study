@@ -6,7 +6,7 @@ const crawlingIndex = require('../../controller/crawling/index');
 
 try{
     //crawing
-    router.get('/blogCrawling',asyncHandler(crawlingIndex.blogCrawling))
+    router.post('/blog',asyncHandler(crawlingIndex.blogCrawling))
 }catch(e){
     console.log("crawling Err")
 }

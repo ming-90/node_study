@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
 import blogInfomation from '../../Model/blogInfomation'
+import moment from 'moment'
 
 module.exports = async(req, res, next) => {
 
@@ -70,9 +71,9 @@ module.exports = async(req, res, next) => {
             searchList[i].total = totalList
             searchList[i].today = todayList
         }
-        console.log(searchList)
+        //console.log(searchList)
         dbInsert(searchList, keyword)
-        res.json({ result : "OK"})
+        res.json({ searchList })
 
 
      }catch(e){
@@ -92,10 +93,11 @@ const dbInsert = (data, keyword) => {
                 }
                 //디비에 내용이 없을때만 인서트
                 if(findblog !== null){ 
-                    console.log(findblog)
+                    console.log("ID_" + i + " : " + findblog["blogId"])
                     return
                 }
 
+                console.log("DB Insert : " + element["blogId"])
                 blogInfomation.create({
                     blogId: element["id"][i],
                     blogAddr: element["Addr"][i],
@@ -105,11 +107,12 @@ const dbInsert = (data, keyword) => {
                     searchPage: element["page"],
                     sendYN: "N",
                     lastDate: "",
-                    contentsNote: ""
+                    contentsNote: "",
+                    makeDate : moment().format("YYYY-MM-DD HH:mm:ss"),
+                    updateDate : moment().format("YYYY-MM-DD HH:mm:ss")
                 })
             }
             )
         }
     })
-    
 }

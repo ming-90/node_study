@@ -10,4 +10,4 @@ const userSchema = new Schema({
     loginDate : {type:Date, default: Date.now}
 })
 
-module.exports = mongoose.model('userInfomation',userSchema);
+module.exports = mongoose.model('userInformation',userSchema);
