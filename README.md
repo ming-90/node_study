@@ -12,3 +12,7 @@
 
 3. pull
     * git pull origin master
+
+4. ignore에 설정한 파일이 올라갈때 캐쉬를 지워주면 된다
+    * git rm -r --cached .
+    * 이후 add 
