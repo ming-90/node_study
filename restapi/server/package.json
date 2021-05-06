@@ -28,7 +28,7 @@
     "phantomjs": "^2.1.7",
     "puppeteer": "^1.18.1",
     "request": "^2.88.0",
-    "sanitize-html": "^1.20.1"
+    "sanitize-html": "^2.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
